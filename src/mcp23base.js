@@ -14,7 +14,7 @@ class Mcp23Base {
   }
 
   close() {
-    // Detatch from bus. No close needed.
+    // Detach from bus. No close needed.
     return Promise.resolve();
   }
 

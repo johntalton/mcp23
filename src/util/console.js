@@ -38,11 +38,11 @@ class ConsoleUtil {
     if(gpio.direction === 'in') { // todo should we use const here or is string a better interface
       lines.push('\u21E6 Input Port: ' + gpio.port + ' Pin: ' + gpio.pin + ' Edge: ' + gpio.edge);
       if(gpio.pendingInterrupt) { lines.push('  \uD83D\uDD14 pending interrupt'); }
-    }
-    else if(gpio.direction === 'out') {
+    } else if(gpio.direction === 'out') {
       lines.push('\u21E8 Output Port: ' + gpio.port + ' Pin: ' + gpio.pin);
+    } else {
+      throw new Error('unknown direction ' + gpio.direction);
     }
-    else { throw Error('unknown direction ' + gpio.direction); }
 
     lines.push('  active-low: ' + gpio.activeLow);
     lines.push('  pull-up: ' + (gpio.pullUp ? 'enabled 100 k\u2126' : 'disabled'));
