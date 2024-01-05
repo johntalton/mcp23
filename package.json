@@ -1,28 +1,62 @@
 {
   "name": "@johntalton/mcp23",
-  "version": "3.0.3",
+  "version": "5.0.0",
   "description": "",
-  "main": "src/mcp23.js",
-  "scripts": {
-    "lint": "./node_modules/.bin/eslint ./src",
-    "coverage": ""
-  },
   "author": "johntalton@gmail.com",
   "license": "MIT",
+  "main": "lib/index.js",
+  "type": "module",
+  "exports": {
+    ".": "./lib/index.js"
+  },
+  "files": [
+    "lib/**/*.js",
+    "lib/**/*.d.ts",
+    "lib/**/*.d.ts.map",
+    "lib/**/*.js.map"
+  ],
+  "scripts": {
+    "test": "npm run test:mocha",
+    "test:mocha": "./node_modules/.bin/mocha",
+    "lint": "./node_modules/.bin/eslint --quiet  --ext .ts src/*.ts",
+    "build": "tsc",
+    "build:watch": "tsc --watch"
+  },
+  "mocha": {
+    "spec": [
+      "test/*.spec.js"
+    ],
+    "grep": "@broken|@slow",
+    "invert": true,
+    "parallel": true,
+    "watch": false,
+    "sort": false,
+    "forbitOnly": true,
+    "check-leaks": true,
+    "global": []
+  },
   "dependencies": {
-    "@johntalton/and-other-delights": "^3.0.2"
+    "@johntalton/and-other-delights": "../and-other-delights",
+    "@johntalton/bitsmush": "^1.0.0"
   },
   "devDependencies": {
-    "eslint": "^8.21.0",
+    "@johntalton/eslint-config": "^3.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.15.0",
+    "chai": "^4.3.7",
+    "eslint": "^8.42.0",
+    "eslint-import-resolver-typescript": "^3.5.5",
     "eslint-plugin-fp": "^2.3.0",
+    "eslint-plugin-functional": "^6.0.0",
     "eslint-plugin-immutable": "^1.0.0",
-    "eslint-plugin-import": "^2.21.2",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-mocha": "^10.1.0",
     "eslint-plugin-no-loops": "^0.3.0",
     "eslint-plugin-no-use-extend-native": "^0.5.0",
-    "eslint-plugin-promise": "^6.0.0",
-    "eslint-plugin-security": "^1.4.0",
-    "eslint-plugin-spellcheck": "0.0.19",
-    "onoff": "^6.0.0",
-    "repler": "github:johntalton/repler"
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-security": "^2.1.0",
+    "eslint-plugin-spellcheck": "0.0.20",
+    "mocha": "^10.2.0",
+    "typescript": "^5.1.3"
   }
 }
