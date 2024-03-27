@@ -4,7 +4,7 @@ Microchip's 8bit and 16bit wide gpio expander provides the ability to offload gp
 
 [![npm Version](http://img.shields.io/npm/v/@johntalton/mcp23.svg)](https://www.npmjs.com/package/@johntalton/mcp23)
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/johntalton/mcp23)
-![CI](https://github.com/johntalton/mcp23/workflows/CI/badge.svg?branch=main&event=push)
+![CI](https://github.com/johntalton/mcp23/workflows/CI/badge.svg)
 ![CodeQL](https://github.com/johntalton/mcp23/workflows/CodeQL/badge.svg)
 ![GitHub](https://img.shields.io/github/license/johntalton/mcp23)
 [![Downloads Per Month](http://img.shields.io/npm/dm/@johntalton/mcp23.svg)](https://www.npmjs.com/package/@johntalton/mcp23)
