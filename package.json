@@ -41,7 +41,7 @@
   },
   "devDependencies": {
     "@johntalton/eslint-config": "^3.0.0",
-    "@typescript-eslint/eslint-plugin": "^6.15.0",
+    "@typescript-eslint/eslint-plugin": "^7.4.0",
     "chai": "^4.3.7",
     "eslint": "^8.42.0",
     "eslint-import-resolver-typescript": "^3.5.5",
