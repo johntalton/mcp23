@@ -1,14 +1,15 @@
-import { BitSmush, SmushMap } from '@johntalton/bitsmush'
-
+/* eslint-disable fp/no-mutating-methods */
+import { BitSmush } from '@johntalton/bitsmush'
 import {
 	Banks,
 	CommonMode,
-	DigitalIO,
 	Directions,
+	DigitalIO,
 	Edges,
 	InterruptMode,
 	ProfileMode
 } from './defines.js'
+
 import { Edge } from './types.js'
 
 // for `.indexOf` return
@@ -28,8 +29,8 @@ function NOT_BIT(bit: number) { return bit === BIT_SET ? BIT_UNSET : BIT_SET }
 // SMUSH_MAP_8_BIT_NAMES
 // const PORT_PACKMAP = [...SMUSH_MAP_8_BIT_NAMES].reverse() // REVERSE_TRUE_8_PACKMAP
 // const IOCON_PACKMAP = SMUSH_MAP_8_BIT_NAMES // TRUE_8_PACKMAP
-const PORT_PACKMAP: SmushMap = [ [0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1], [7, 1] ]
-const IOCON_PACKMAP: SmushMap = [ [7, 1], [6, 1], [5, 1], [4, 1], [3, 1], [2, 1], [1, 1], [0, 1] ]
+const PORT_PACKMAP = [ [0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1], [7, 1] ]
+const IOCON_PACKMAP = [ [7, 1], [6, 1], [5, 1], [4, 1], [3, 1], [2, 1], [1, 1], [0, 1] ]
 
 //
 const MIR_EN = BIT_SET
@@ -105,11 +106,11 @@ export class Converter {
 
 	static calculateNewPinValue(current, pin, value, portPinmap) {
 		const index = portPinmap.gpios.indexOf(pin)
-		if (index === NOT_FOUND) { console.log(portPinmap); throw new Error('gpio pin not found: ' + pin) }
+		if(index === NOT_FOUND) { console.log(portPinmap); throw new Error('gpio pin not found: ' + pin) }
 
 		const currentBits = BitSmush.unSmushBits(PORT_PACKMAP, current)
 
-		if (currentBits[index] === value) { console.log('REDUNDANT BIT SET') }
+		if(currentBits[index] === value) { console.log('REDUNDANT BIT SET') }
 
 		currentBits[index] = value
 
@@ -126,11 +127,11 @@ export class Converter {
 			const ai = pinmap.portA.gpios.indexOf(gpio.pin)
 			const bi = pinmap.portB.gpios.indexOf(gpio.pin)
 
-			if (ai === NOT_FOUND && bi === NOT_FOUND) { throw new Error('gpio pin not found: ' + gpio.pin) }
-			if (ai !== NOT_FOUND && bi !== NOT_FOUND) { throw new Error('gpio found in both port maps') }
+			if(ai === NOT_FOUND && bi === NOT_FOUND) { throw new Error('gpio pin not found: ' + gpio.pin) }
+			if(ai !== NOT_FOUND && bi !== NOT_FOUND) { throw new Error('gpio found in both port maps') }
 
-			if (ai !== NOT_FOUND) { acc.a.push(gpio) }
-			if (bi !== NOT_FOUND) { acc.b.push(gpio) }
+			if(ai !== NOT_FOUND) { acc.a.push(gpio) }
+			if(bi !== NOT_FOUND) { acc.b.push(gpio) }
 
 			return acc
 		}, { a: [], b: [] })
@@ -147,10 +148,10 @@ export class Converter {
 			const pin = portPinmap.gpios.indexOf(gpio.pin)
 			// console.log('reduction to port state pin', pin, state);
 
-			if (pin === undefined) { throw new Error('pin not found in map: ' + gpio.pin) }
-			if (!Number.isInteger(pin)) { throw new Error('pin not resolved to integer: ' + gpio.pin + ' / ' + pin) }
-			if (pin === NOT_FOUND) { throw new Error('pin not found in map') }
-			if (pin < 0 || pin >= 8) { throw new Error('pin range error 0 - 7' + pin) }
+			if(pin === undefined) { throw new Error('pin not found in map: ' + gpio.pin) }
+			if(!Number.isInteger(pin)) { throw new Error('pin not resolved to integer: ' + gpio.pin + ' / ' + pin) }
+			if(pin === NOT_FOUND) { throw new Error('pin not found in map') }
+			if(pin < 0 || pin >= 8) { throw new Error('pin range error 0 - 7' + pin) }
 
 			const direction = gpio.direction === Directions.IN ? BIT_SET : BIT_UNSET
 			const polarity = gpio.activeLow ? BIT_SET : BIT_UNSET
@@ -194,13 +195,12 @@ export class Converter {
 
 		// note, we use BIT_SET/UNSET as defaultValue here as this return array
 		//  represents the bits needed to correctly set `gpinten`, `intcon` and `defval`
-		switch (edge) {
-		case Edges.NONE: return [BIT_UNSET, DNC, DNC]; break
-		case Edges.RISING: return [BIT_SET, BIT_SET, BIT_UNSET]; break // todo
-		case Edges.FALLING: return [BIT_SET, BIT_SET, BIT_SET]; break // todo correct directions?
-		case Edges.BOTH: return [BIT_SET, BIT_UNSET, DNC]; break
-		default: throw new Error('unknown edge: ' + edge); break
-		}
+		if(edge === Edges.NONE) { return [BIT_UNSET, DNC, DNC] }
+		if(edge === Edges.RISING) { return [BIT_SET, BIT_SET, BIT_UNSET] } // todo
+		if(edge === Edges.FALLING) { return [BIT_SET, BIT_SET, BIT_SET] } // todo correct directions?
+		if(edge === Edges.BOTH) { return [BIT_SET, BIT_UNSET, DNC] }
+
+		throw new Error('unknown edge: ' + edge)
 	}
 
 	static toIocon(profile) {
@@ -225,7 +225,7 @@ export class Converter {
 	}
 
 	static toIoconInterrupt(mode) {
-		if (mode === undefined) { throw new Error('undefined interrupt mode') }
+		if(mode === undefined) { throw new Error('undefined interrupt mode') }
 
 		const POL_DNC = POL_ACTIVELOW // todo can be made to signature
 		const lookup = [
@@ -235,16 +235,16 @@ export class Converter {
 		]
 
 		const item = lookup.find(kvp => kvp.key === mode)
-		if (item === undefined) { throw new Error('unknown iocon interrupt mode: ' + mode) }
+		if(item === undefined) { throw new Error('unknown iocon interrupt mode: ' + mode) }
 
 		return item.odrPol
 	}
 
 	static toIoconMode(mode) {
-		if (mode === ProfileMode.MODE_INTERLACED_BLOCK) { return CommonMode.MODE_MAP_INTERLACED_BLOCK }
-		if (mode === ProfileMode.MODE_DUAL_BLOCKS) { return CommonMode.MODE_MAP_DUAL_BLOCKS }
-		if (mode === ProfileMode.MODE_16BIT_POLL) { return CommonMode.MODE_MAP_16BIT_POLL }
-		if (mode === ProfileMode.MODE_8BIT_POLL) { return CommonMode.MODE_MAP_8BIT_POLL }
+		if(mode === ProfileMode.MODE_INTERLACED_BLOCK) { return CommonMode.MODE_MAP_INTERLACED_BLOCK }
+		if(mode === ProfileMode.MODE_DUAL_BLOCKS) { return CommonMode.MODE_MAP_DUAL_BLOCKS }
+		if(mode === ProfileMode.MODE_16BIT_POLL) { return CommonMode.MODE_MAP_16BIT_POLL }
+		if(mode === ProfileMode.MODE_8BIT_POLL) { return CommonMode.MODE_MAP_8BIT_POLL }
 		throw new Error('unknown mode: ' + mode)
 	}
 
@@ -328,8 +328,8 @@ export class Converter {
 	}
 
 	static fromGpioInterrupt(gpinten, ctrl, dVal) {
-		if (!gpinten) { return Edges.EDGE_NONE }
-		if (!ctrl) { return Edges.EDGE_BOTH }
+		if(!gpinten) { return Edges.EDGE_NONE }
+		if(!ctrl) { return Edges.EDGE_BOTH }
 		return dVal === DigitalIO.HIGH ? Edges.EDGE_FALLING : Edges.EDGE_RISING // todo correct direction?
 	}
 
@@ -345,7 +345,7 @@ export class Converter {
 		const activelow = i === POL_ACTIVELOW
 
 		// sanity check, according to doc, always zero
-		if (u !== 0) { throw new Error('iocon unpack error / zero bit') }
+		if(u !== 0) { throw new Error('iocon unpack error / zero bit') }
 
 		// console.log('fromIocon', iocon.toString(2), b, m, s, d, h, o, i);
 
@@ -365,17 +365,17 @@ export class Converter {
 	}
 
 	static fromIoconMode(bank, sequential) {
-		if (bank === Banks.BANK0 && sequential) { return ProfileMode.MODE_INTERLACED_BLOCK }
-		if (bank === Banks.BANK0 && !sequential) { return ProfileMode.MODE_16BIT_POLL }
-		if (bank === Banks.BANK1 && sequential) { return ProfileMode.MODE_DUAL_BLOCKS }
-		if (bank === Banks.BANK1 && !sequential) { return ProfileMode.MODE_8BIT_POLL }
+		if(bank === Banks.BANK0 && sequential) { return ProfileMode.MODE_INTERLACED_BLOCK }
+		if(bank === Banks.BANK0 && !sequential) { return ProfileMode.MODE_16BIT_POLL }
+		if(bank === Banks.BANK1 && sequential) { return ProfileMode.MODE_DUAL_BLOCKS }
+		if(bank === Banks.BANK1 && !sequential) { return ProfileMode.MODE_8BIT_POLL }
 		throw new Error('unknown mode / sequential: ' + bank + ' / ' + sequential)
 	}
 
 
 	static fromIoconInterrupt(odEn, activeLow) {
-		if (odEn) { return InterruptMode.INT_OPEN_DRAIN }
-		if (activeLow) { return InterruptMode.INT_ACTIVE_LOW }
+		if(odEn) { return InterruptMode.INT_OPEN_DRAIN }
+		if(activeLow) { return InterruptMode.INT_ACTIVE_LOW }
 		return InterruptMode.INT_ACTIVE_HIGH
 	}
 }

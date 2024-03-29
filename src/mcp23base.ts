@@ -47,7 +47,7 @@ export class Mcp23Base {
 		const profile = Converter.fromIocon(state.iocon)
 
 		const pcm = Converter.toIoconMode(profile.mode)
-		if (!matchCommonMode(pcm, mode)) {
+		if(!matchCommonMode(pcm, mode)) {
 			console.log('read profiles bank is not the bank used to read!', profile.mode, mode)
 		}
 

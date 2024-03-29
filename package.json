@@ -17,8 +17,8 @@
   ],
   "scripts": {
     "test": "npm run test:mocha",
-    "test:mocha": "./node_modules/.bin/mocha",
-    "lint": "./node_modules/.bin/eslint --quiet  --ext .ts src/*.ts",
+    "test:mocha": "mocha",
+    "lint": "eslint --quiet  --ext .ts src/*.ts",
     "build": "tsc",
     "build:watch": "tsc --watch"
   },
@@ -35,14 +35,57 @@
     "check-leaks": true,
     "global": []
   },
+  "eslintConfig": {
+    "extends": [
+      "eslint:recommended",
+      "plugin:promise/recommended",
+      "plugin:import/recommended",
+      "plugin:import/errors",
+      "plugin:import/warnings",
+      "@johntalton/eslint-config/ts",
+      "@johntalton/eslint-config/es"
+    ],
+    "parserOptions": {
+      "ecmaVersion": 2020,
+      "sourceType": "module"
+    },
+    "env": {
+      "es6": true,
+      "browser": true
+    },
+    "rules": {
+      "no-tabs": "off",
+      "fp/no-class": "off",
+      "class-methods-use-this": "warn",
+      "max-len": [
+        "warn",
+        {
+          "code": 120,
+          "ignoreUrls": true,
+          "tabWidth": 2
+        }
+      ],
+      "spellcheck/spell-checker": [
+        "error",
+        {
+          "identifiers": false,
+          "minLength": 3,
+          "skipWords": [
+            "gpio", "gpios", "mcp23017", "iocon", "mcp23gpio", "mcp23",
+            "iodir", "gpinten", "intcon", "defval"
+          ]
+        }
+      ]
+    }
+  },
   "dependencies": {
-    "@johntalton/and-other-delights": "../and-other-delights",
+    "@johntalton/and-other-delights": "^7.0.0",
     "@johntalton/bitsmush": "^1.0.0"
   },
   "devDependencies": {
-    "@johntalton/eslint-config": "^3.0.0",
-    "@typescript-eslint/eslint-plugin": "^6.15.0",
-    "chai": "^4.3.7",
+    "@johntalton/eslint-config": "github:johntalton/eslint-config",
+    "@typescript-eslint/eslint-plugin": "^7.4.0",
+    "chai": "^5.1.0",
     "eslint": "^8.42.0",
     "eslint-import-resolver-typescript": "^3.5.5",
     "eslint-plugin-fp": "^2.3.0",

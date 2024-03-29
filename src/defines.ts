@@ -8,8 +8,8 @@ export const Banks: { [key: string]: Bank } = {
 }
 
 export function matchCommonMode(one: Mode, two: Mode) {
-	if (one.bank !== two.bank) { return false }
-	if (one.sequential !== two.sequential) { return false }
+	if(one.bank !== two.bank) { return false }
+	if(one.sequential !== two.sequential) { return false }
 	return true
 }
 
