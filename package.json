@@ -86,7 +86,7 @@
     "@johntalton/eslint-config": "github:johntalton/eslint-config",
     "@typescript-eslint/eslint-plugin": "^7.4.0",
     "chai": "^5.1.0",
-    "eslint": "^8.42.0",
+    "eslint": "^9.1.0",
     "eslint-import-resolver-typescript": "^3.5.5",
     "eslint-plugin-fp": "^2.3.0",
     "eslint-plugin-functional": "^6.0.0",
