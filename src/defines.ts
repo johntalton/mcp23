@@ -1,63 +1,112 @@
-/* eslint-disable max-classes-per-file */
+export type Bank = 0 | 1
 
-import { Bank, Direction, Edge, Mode } from './types.js'
-
-export const Banks: { [key: string]: Bank } = {
-	BANK0: 0, // ABAB
-	BANK1: 1 // AA BB
+export type Mode = {
+	bank: Bank,
+	sequential: boolean
 }
 
-export function matchCommonMode(one: Mode, two: Mode) {
-	if(one.bank !== two.bank) { return false }
-	if(one.sequential !== two.sequential) { return false }
-	return true
+export type Port = 'A' | 'B'
+
+export type Direction = 'in' | 'out'
+
+export type EnabledInversePolarity =  0 | 1
+export type EnabledInterrupt =  0 | 1
+export type Digital =  0 | 1
+export type InterruptControl =  0 | 1
+export type PullUp =  0 | 1
+export type InterruptFlag = 0 | 1
+
+export type Control = {}
+
+// ---
+
+export const BANK_0: Bank = 0
+export const BANK_1: Bank = 1
+
+export const PORT = { A: 'A', B: 'B' }
+export const DIRECTION = { IN: 'in', OUT: 'out' }
+
+// bank 0 layout
+export const REGISTERS_BANK_0 = {
+	IODIRA: 0x00,
+	IODIRB: 0x01,
+	IPOLA: 0x02,
+	IPOLB: 0x03,
+	GPINTENA: 0x04,
+	GPINTENB: 0x05,
+	DEFVALA: 0x06,
+	DEFVALB: 0x07,
+	INTCONA: 0x08,
+	INTCONB: 0x09,
+	IOCON: 0x0A,
+	IOCON_ALT: 0x0B,
+	GPPUA: 0x0C,
+	GPPUB: 0x0D,
+	INTFA: 0x0E,
+	INTFB: 0x0F,
+	INTCAPA: 0x10,
+	INTCAPB: 0x11,
+	GPIOA: 0x12,
+	GPIOB: 0x13,
+	OLATA: 0x14,
+	OLATB: 0x15
 }
 
-// theses follow similarly to the ones defined
-// in the converter, but should not be confused.
-// can also be called common modes. as they are the
-//  terms in which the `Common` defines the word mode
-// of course they provide similar functionality here.
-export const CommonMode: { [key: string]: Mode} = {
-	MODE_MAP_8BIT_POLL: { bank: Banks.BANK1, sequential: false },
-	MODE_MAP_16BIT_POLL: { bank: Banks.BANK0, sequential: false },
-	MODE_MAP_DUAL_BLOCKS: { bank: Banks.BANK1, sequential: true },
-	MODE_MAP_INTERLACED_BLOCK: { bank: Banks.BANK0, sequential: true }
+// bank 1 layout
+export const REGISTERS_BANK_1 = {
+	IODIRA: 0x00,
+	IPOLA: 0x01,
+	GPINTENA: 0x02,
+	DEFVALA: 0x03,
+	INTCONA: 0x04,
+	IOCON: 0x05,
+	GPPUA: 0x06,
+	INTFA: 0x07,
+	INTCAPA: 0x08,
+	GPIOA: 0x09,
+	OLATA: 0x0A,
+
+	IODIRB: 0x10,
+	IPOLB: 0x11,
+	GPINTENB: 0x12,
+	DEFVALB: 0x13,
+	INTCONB: 0x14,
+	IOCON_ALT: 0x15,
+	GPPUB: 0x16,
+	INTFB: 0x17,
+	INTCAPB: 0x18,
+	GPIOB: 0x19,
+	OLATB: 0x1A
 }
 
-// mode defined by chip as reset mode (exported bellow)
-export const COMMON_MODE_MAP_DEFAULT = CommonMode.MODE_MAP_INTERLACED_BLOCK
 
-// ------------------------------------
 
-export const DigitalIO: { [key: string]: number } = {
-	HIGH: 1,
-	LOW: 0
-}
 
-export const ProfileMode: { [key: string]: string } = {
-	MODE_8BIT_POLL: '8bit-poll',
-	MODE_16BIT_POLL: '16bit-poll', // AB Wobble
-	MODE_DUAL_BLOCKS: 'dual-blocks',
-	MODE_INTERLACED_BLOCK: 'interlaced-block' // default
-}
+// export const HIGH = 1
+// export const LOW = 0
 
-export const InterruptMode: { [key: string]: string } = {
-	INT_ACTIVE_LOW: 'active-low',
-	INT_ACTIVE_HIGH: 'active-high',
-	INT_OPEN_DRAIN: 'open-drain'
-}
+// export const BIT_SET = 1
+// export const BIT_UNSET = 0
 
-export const Directions: { [key: string]: Direction } = {
-	IN: 'in',
-	OUT: 'out',
-	OUT_HIGH: 'high',
-	OUT_LOW: 'low'
-}
+// export const MIR_EN = BIT_SET
+// export const SEQ_EN = BIT_UNSET
+// export const SLEW_EN = BIT_UNSET
+// export const HWA_EN = BIT_SET
+// export const ODR_OPENDRAIN = BIT_SET
+// export const POL_ACTIVELOW = BIT_UNSET
 
-export const Edges: { [key: string]: Edge } = {
-	EDGE_NONE: 'none',
-	EDGE_RISING: 'rising',
-	EDGE_FALLING: 'falling',
-	EDGE_BOTH: 'both'
-}
+// function NOT_BIT(bit: number) { return bit === BIT_SET ? BIT_UNSET : BIT_SET }
+
+// export const MIR_DEN = NOT_BIT(MIR_EN)
+// export const SEQ_DEN = NOT_BIT(SEQ_EN)
+// export const SLEW_DEN = NOT_BIT(SLEW_EN)
+// export const HWA_DEN = NOT_BIT(HWA_EN)
+// export const ODR_ACTIVEDRIVER = NOT_BIT(ODR_OPENDRAIN)
+// export const POL_ACTIVEHIGH = NOT_BIT(POL_ACTIVELOW)
+
+// export const DEFAULT_MIR = MIR_DEN
+// export const DEFAULT_SEQ = SEQ_EN
+// export const DEFAULT_SLEW = SLEW_EN
+// export const DEFAULT_HWA = HWA_DEN
+// export const DEFAULT_ODR = ODR_ACTIVEDRIVER
+// export const DEFAULT_POL = POL_ACTIVELOW

@@ -10,6 +10,7 @@
     ".": "./lib/index.js"
   },
   "files": [
+    "src/*.ts",
     "lib/**/*.js",
     "lib/**/*.d.ts",
     "lib/**/*.d.ts.map",

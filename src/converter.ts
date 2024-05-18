@@ -7,70 +7,30 @@ import {
 	DigitalIO,
 	Edges,
 	InterruptMode,
-	ProfileMode
+	ProfileMode,
+	PORT_PACKMAP,
+	BIT_UNSET,
+	BIT_SET,
+	NOT_FOUND,
+	IODIR_BASE_VALUE,
+	Edge,
+	SEQ_EN,
+	SEQ_DEN,
+	MIR_EN,
+	SLEW_DEN,
+	MIR_DEN,
+	HWA_EN,
+	SLEW_EN,
+	ODR_OPENDRAIN,
+	ODR_ACTIVEDRIVER,
+	POL_ACTIVEHIGH,
+	POL_ACTIVELOW,
+	HWA_DEN,
+	UNUSED_IOCON_BIT,
+	OLAT_LOGIC_HIGH,
+	OLAT_LOGIC_LOW,
+	IOCON_PACKMAP
 } from './defines.js'
-
-import { Edge } from './types.js'
-
-// for `.indexOf` return
-const NOT_FOUND = -1
-
-//
-const IODIR_BASE_VALUE = 0xFF
-// const IODIR_DEFAULT_VALUE = 0xFF;
-
-//
-const BIT_SET = 1
-const BIT_UNSET = 0
-
-function NOT_BIT(bit: number) { return bit === BIT_SET ? BIT_UNSET : BIT_SET }
-
-//
-// SMUSH_MAP_8_BIT_NAMES
-// const PORT_PACKMAP = [...SMUSH_MAP_8_BIT_NAMES].reverse() // REVERSE_TRUE_8_PACKMAP
-// const IOCON_PACKMAP = SMUSH_MAP_8_BIT_NAMES // TRUE_8_PACKMAP
-const PORT_PACKMAP = [ [0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1], [7, 1] ]
-const IOCON_PACKMAP = [ [7, 1], [6, 1], [5, 1], [4, 1], [3, 1], [2, 1], [1, 1], [0, 1] ]
-
-//
-const MIR_EN = BIT_SET
-const SEQ_EN = BIT_UNSET
-const SLEW_EN = BIT_UNSET
-const HWA_EN = BIT_SET
-const ODR_OPENDRAIN = BIT_SET
-const POL_ACTIVELOW = BIT_UNSET
-
-const MIR_DEN = NOT_BIT(MIR_EN)
-const SEQ_DEN = NOT_BIT(SEQ_EN)
-const SLEW_DEN = NOT_BIT(SLEW_EN)
-const HWA_DEN = NOT_BIT(HWA_EN)
-const ODR_ACTIVEDRIVER = NOT_BIT(ODR_OPENDRAIN)
-const POL_ACTIVEHIGH = NOT_BIT(POL_ACTIVELOW)
-
-const DEFAULT_MIR = MIR_DEN
-const DEFAULT_SEQ = SEQ_EN
-const DEFAULT_SLEW = SLEW_EN
-const DEFAULT_HWA = HWA_DEN
-const DEFAULT_ODR = ODR_ACTIVEDRIVER
-const DEFAULT_POL = POL_ACTIVELOW
-
-const UNUSED_IOCON_BIT = BIT_UNSET // they say the last bit is unset
-
-export const DEFAULT_IOCON = BitSmush.smushBits(
-	IOCON_PACKMAP,
-	[
-		DEFAULT_MIR,
-		DEFAULT_SEQ,
-		DEFAULT_SLEW,
-		DEFAULT_HWA,
-		DEFAULT_ODR,
-		DEFAULT_POL,
-		UNUSED_IOCON_BIT
-	]
-)
-
-export const OLAT_LOGIC_HIGH = DigitalIO.HIGH // map to h/l as we export those for comparison
-export const OLAT_LOGIC_LOW = DigitalIO.LOW
 
 /**
  *
