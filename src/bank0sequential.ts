@@ -7,7 +7,7 @@ export const OFFSET = 0
 export const LENGTH = 22
 
 export class CommonBank0Sequential {
-	static async getPorts(aBus: I2CAddressedBus, mode: Mode) {
+	static async getPorts(aBus: I2CAddressedBus, _mode: Mode) {
 		const buffer = await aBus.readI2cBlock(OFFSET, LENGTH)
 		return Converter.decodePorts(buffer)
 	}

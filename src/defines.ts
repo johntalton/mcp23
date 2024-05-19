@@ -26,8 +26,26 @@ export const LOW: Digital = 0
 export const BANK_0: Bank = 0
 export const BANK_1: Bank = 1
 
-export const PORT = { A: 'A', B: 'B' }
-export const DIRECTION: { [key: string]: Direction } = { IN: 1, OUT: 0 }
+export const PORT: { [key: string]: Port }  = {
+	A: 'A',
+	B: 'B'
+}
+export const DIRECTION: { [key: string]: Direction } = {
+	IN: 1,
+	OUT: 0
+}
+
+export const INTERRUPT_CONTROL: { [key: string]: InterruptControl }  = {
+	DEFAULT_VALUE: 1,
+	PREVIOUS_VALUE: 0
+}
+
+export const MODE = {
+	POLL_8_BIT: { bank: BANK_1, sequential: false },
+	POLL_16_BIT: { bank: BANK_0, sequential: false },
+	DUAL_BLOCK: { bank: BANK_1, sequential: true },
+	INTERLACED_BLOCK: { bank: BANK_0, sequential: true }
+}
 
 // bank 0 layout
 export const REGISTERS_BANK_0 = {

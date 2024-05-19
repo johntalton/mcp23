@@ -14,7 +14,7 @@ export const BLOCK_BANK_1_BY_PORT = {
 }
 
 export class CommonBank1Sequential {
-	static async getPort(aBus: I2CAddressedBus, mode: Mode, port: Port) {
+	static async getPort(aBus: I2CAddressedBus, _mode: Mode, port: Port) {
 		const block = BLOCK_BANK_1_BY_PORT[port]
 		const buffer = await aBus.readI2cBlock(block.OFFSET, block.LENGTH)
 		return Converter.decodePort(buffer)
