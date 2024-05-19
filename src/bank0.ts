@@ -47,53 +47,53 @@ export const REGISTERS_FOR_SEQUENTIAL = [
 
 
 export class CommonBank0 {
-	static async getDirections(aBus: I2CAddressedBus, mode: Mode): Promise<Iterable<Direction>> {
+	static async getDirections(aBus: I2CAddressedBus, mode: Mode): Promise<Array<Direction>> {
 		const buffer = await aBus.readI2cBlock(REGISTERS_FOR_SEQUENTIAL[mode.bank].IODIR, BYTE_LENGTH_TWO)
-		return Converter.decodeDigit(buffer)
+		return Converter.decodeDirection(buffer)
 	}
 
-	static async getPolarities(aBus: I2CAddressedBus, mode: Mode): Promise<Iterable<EnabledInversePolarity>> {
+	static async getPolarities(aBus: I2CAddressedBus, mode: Mode): Promise<Array<EnabledInversePolarity>> {
 		const buffer = await aBus.readI2cBlock(REGISTERS_FOR_SEQUENTIAL[mode.bank].IPOL, BYTE_LENGTH_TWO)
-		return Converter.decodeDigit(buffer)
+		return Converter.decodePolarity(buffer)
 	}
 
-	static async getInterrupts(aBus: I2CAddressedBus, mode: Mode): Promise<Iterable<EnabledInterrupt>> {
+	static async getInterrupts(aBus: I2CAddressedBus, mode: Mode): Promise<Array<EnabledInterrupt>> {
 		const buffer = await aBus.readI2cBlock(REGISTERS_FOR_SEQUENTIAL[mode.bank].GPINTEN, BYTE_LENGTH_TWO)
-		return Converter.decodeDigit(buffer)
+		return Converter.decodeInterrupt(buffer)
 	}
 
-	static async getDefaultValues(aBus: I2CAddressedBus, mode: Mode): Promise<Iterable<Digital>> {
+	static async getDefaultValues(aBus: I2CAddressedBus, mode: Mode): Promise<Array<Digital>> {
 		const buffer = await aBus.readI2cBlock(REGISTERS_FOR_SEQUENTIAL[mode.bank].DEFVAL, BYTE_LENGTH_TWO)
-		return Converter.decodeDigit(buffer)
+		return Converter.decodeDigital(buffer)
 	}
 
-	static async getInterruptControls(aBus: I2CAddressedBus, mode: Mode): Promise<Iterable<InterruptControl>> {
+	static async getInterruptControls(aBus: I2CAddressedBus, mode: Mode): Promise<Array<InterruptControl>> {
 		const buffer = await aBus.readI2cBlock(REGISTERS_FOR_SEQUENTIAL[mode.bank].INTCON, BYTE_LENGTH_TWO)
-		return Converter.decodeDigit(buffer)
+		return Converter.decodeInterruptControl(buffer)
 	}
 
-	static async getPullUps(aBus: I2CAddressedBus, mode: Mode): Promise<Iterable<PullUp>> {
+	static async getPullUps(aBus: I2CAddressedBus, mode: Mode): Promise<Array<PullUp>> {
 		const buffer = await aBus.readI2cBlock(REGISTERS_FOR_SEQUENTIAL[mode.bank].GPPU, BYTE_LENGTH_TWO)
-		return Converter.decodeDigit(buffer)
+		return Converter.decodePullUp(buffer)
 	}
 
-	static async getInterruptFlags(aBus: I2CAddressedBus, mode: Mode): Promise<Iterable<InterruptFlag>> {
+	static async getInterruptFlags(aBus: I2CAddressedBus, mode: Mode): Promise<Array<InterruptFlag>> {
 		const buffer = await aBus.readI2cBlock(REGISTERS_FOR_SEQUENTIAL[mode.bank].INTF, BYTE_LENGTH_TWO)
-		return Converter.decodeDigit(buffer)
+		return Converter.decodeInterruptFlag(buffer)
 	}
 
-	static async getInterruptCaptureValues(aBus: I2CAddressedBus, mode: Mode): Promise<Iterable<Digital>> {
+	static async getInterruptCaptureValues(aBus: I2CAddressedBus, mode: Mode): Promise<Array<Digital>> {
 		const buffer = await aBus.readI2cBlock(REGISTERS_FOR_SEQUENTIAL[mode.bank].INTCAP, BYTE_LENGTH_TWO)
-		return Converter.decodeDigit(buffer)
+		return Converter.decodeDigital(buffer)
 	}
 
-	static async getOutputValues(aBus: I2CAddressedBus, mode: Mode): Promise<Iterable<Digital>> {
+	static async getOutputValues(aBus: I2CAddressedBus, mode: Mode): Promise<Array<Digital>> {
 		const buffer = await aBus.readI2cBlock(REGISTERS_FOR_SEQUENTIAL[mode.bank].GPIO, BYTE_LENGTH_TWO)
-		return Converter.decodeDigit(buffer)
+		return Converter.decodeDigital(buffer)
 	}
 
-	static async getOutputLatchValues(aBus: I2CAddressedBus, mode: Mode): Promise<Iterable<Digital>> {
+	static async getOutputLatchValues(aBus: I2CAddressedBus, mode: Mode): Promise<Array<Digital>> {
 		const buffer = await aBus.readI2cBlock(REGISTERS_FOR_SEQUENTIAL[mode.bank].OLAT, BYTE_LENGTH_TWO)
-		return Converter.decodeDigit(buffer)
+		return Converter.decodeDigital(buffer)
 	}
 }

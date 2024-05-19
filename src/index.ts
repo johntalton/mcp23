@@ -1,6 +1,6 @@
 export * from './bank0.js'
 export * from './direct.js'
-export * from './sequential.js'
+export * from './bank0sequential.js'
 export * from './bank1sequential.js'
 export * from './converter.js'
 export * from './defines.js'

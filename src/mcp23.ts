@@ -2,7 +2,7 @@ import { I2CAddressedBus } from '@johntalton/and-other-delights'
 
 import { CommonDirect } from './direct.js'
 import { CommonBank0 } from './bank0.js'
-import { CommonSequential } from './sequential.js'
+import { CommonBank0Sequential } from './bank0sequential.js'
 import { CommonBank1Sequential } from './bank1sequential.js'
 
 export class MCP23 {
@@ -46,7 +46,7 @@ export class MCP23 {
 	async getOutputLatchValue(mode, port) { return CommonDirect.getOutputLatchValue(this.#bus, mode, port) }
 	async setOutputLatchValue(mode, port, latchValue) { return CommonDirect.setOutputLatchValue(this.#bus, mode, port, latchValue) }
 
-	// things that can be done in Bank0 and any sequence
+	// things that can be done in Bank 0 and any sequence
 	async getDirections(mode) { return CommonBank0.getDirections(this.#bus, mode) }
 	async getPolarities(mode) { return CommonBank0.getPolarities(this.#bus, mode) }
 	async getInterrupts(mode) { return CommonBank0.getInterrupts(this.#bus, mode) }
@@ -58,10 +58,9 @@ export class MCP23 {
 	async getOutputValues(mode) { return CommonBank0.getOutputValues(this.#bus, mode) }
 	async getOutputLatchValues(mode) { return CommonBank0.getOutputLatchValues(this.#bus, mode) }
 
-	// things that can be done when sequential is True
-	async getPorts(mode) { return CommonSequential.getPorts(this.#bus, mode) }
-	async getPort(mode, port) { return CommonSequential.getPort(this.#bus, mode, port) }
+	// things that can be done in Bank 0 when sequential is True
+	async getPorts(mode) { return CommonBank0Sequential.getPorts(this.#bus, mode) }
 
-	// things that can only be done in Bank1 sequential True
-	async setPort(mode, port, options) { return CommonBank1Sequential.setPort(this.#bus, mode, port, options) }
+	// Bank 1 sequential is True
+	async getPort(mode, port) { return CommonBank1Sequential.getPort(this.#bus, mode, port) }
 }

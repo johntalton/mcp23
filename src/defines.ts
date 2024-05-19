@@ -7,24 +7,27 @@ export type Mode = {
 
 export type Port = 'A' | 'B'
 
-export type Direction = 'in' | 'out'
+export type Direction = 0 | 1
 
-export type EnabledInversePolarity =  0 | 1
-export type EnabledInterrupt =  0 | 1
-export type Digital =  0 | 1
+export type EnabledInversePolarity =  Boolean
+export type EnabledInterrupt =  Boolean
+export type Digital = 0 | 1
 export type InterruptControl =  0 | 1
-export type PullUp =  0 | 1
-export type InterruptFlag = 0 | 1
+export type PullUp =  Boolean
+export type InterruptFlag = Boolean
 
 export type Control = {}
 
 // ---
 
+export const HIGH: Digital = 1
+export const LOW: Digital = 0
+
 export const BANK_0: Bank = 0
 export const BANK_1: Bank = 1
 
 export const PORT = { A: 'A', B: 'B' }
-export const DIRECTION = { IN: 'in', OUT: 'out' }
+export const DIRECTION: { [key: string]: Direction } = { IN: 1, OUT: 0 }
 
 // bank 0 layout
 export const REGISTERS_BANK_0 = {
@@ -82,8 +85,7 @@ export const REGISTERS_BANK_1 = {
 
 
 
-// export const HIGH = 1
-// export const LOW = 0
+
 
 // export const BIT_SET = 1
 // export const BIT_UNSET = 0
