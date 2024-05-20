@@ -9,7 +9,9 @@ import {
 	Digital,
 	InterruptControl,
 	PullUp,
-	InterruptFlag,
+	InterruptFlag
+} from './defines.js'
+import {
 	REGISTERS_BANK_0,
 	REGISTERS_BANK_1,
 	PORT

@@ -1,5 +1,6 @@
 import { I2CAddressedBus } from '@johntalton/and-other-delights'
-import { Mode, PORT, Port, REGISTERS_BANK_1 } from './defines.js'
+import { Mode, PORT, Port } from './defines.js'
+import { REGISTERS_BANK_1 } from './defines.js'
 import { Converter } from './converter.js'
 
 export const BLOCK_BANK_1_BY_PORT = {

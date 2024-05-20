@@ -1,10 +1,10 @@
 import { I2CBufferSource } from '@johntalton/and-other-delights'
 import {
+	BANK_1,
 	DIRECTION,
 	HIGH,
 	INTERRUPT_CONTROL,
-	LOW,
-	PullUp
+	LOW
 } from './defines.js'
 import {
 	Digital,
@@ -12,7 +12,8 @@ import {
 	EnabledInterrupt,
 	EnabledInversePolarity,
 	InterruptControl,
-	InterruptFlag
+	InterruptFlag,
+	PullUp
 } from './defines.js'
 
 export const BIT_SET = 1
@@ -38,7 +39,7 @@ export class Converter {
 
 		return {
 			slew: !disslw,
-			hardwareAddressEnabled: haen,
+			hardwareAddress: haen,
 
 			mode: {
 				bank,
@@ -53,11 +54,11 @@ export class Converter {
 	}
 
   static decodePort(_buffer: I2CBufferSource) {
-
+		throw new Error('no impl')
 	}
 
 	static decodePorts(_buffer: I2CBufferSource) {
-
+		throw new Error('no impl')
 	}
 
   static decodeDigital(buffer: I2CBufferSource): Array<Digital> {
@@ -111,16 +112,47 @@ export class Converter {
 
   // ---
 
-	static encodeIocon(_value, into = Uint8Array.from([ 0x00 ])): ArrayBuffer {
-
-		return into.buffer
-	}
-
-  static encodeDigital(_value: Array<Digital>, into = Uint8Array.from([ 0x00 ])): ArrayBuffer {
+	static encodeIocon(iocon, into = Uint8Array.from([ 0x00 ])): ArrayBuffer {
 		const u8 = ArrayBuffer.isView(into) ?
 			new Uint8Array(into.buffer, into.byteOffset, into.byteLength) :
 			new Uint8Array(into)
 
+		const {
+			slew,
+			hardwareAddress,
+			interrupt,
+			mode
+		} = iocon
+
+		const { mirror, openDrain, interruptPolarityHigh } = interrupt
+		const { bank, sequential } = mode
+
+		u8[0] = 0
+			| (bank === BANK_1 ? SINGLE_BIT_MASK << 7 : 0)
+			| (mirror ? SINGLE_BIT_MASK << 6 : 0)
+			| (!sequential ? SINGLE_BIT_MASK << 5 : 0)
+			| (!slew ? SINGLE_BIT_MASK << 4 : 0)
+			| (hardwareAddress ? SINGLE_BIT_MASK << 3 : 0)
+			| (openDrain ? SINGLE_BIT_MASK << 2 : 0)
+			| (interruptPolarityHigh ? SINGLE_BIT_MASK << 1 : 0)
+
+		return into.buffer
+	}
+
+  static encodeDigital(value: Array<Digital>, into = Uint8Array.from([ 0x00 ])): ArrayBuffer {
+		const u8 = ArrayBuffer.isView(into) ?
+			new Uint8Array(into.buffer, into.byteOffset, into.byteLength) :
+			new Uint8Array(into)
+
+		u8[0] = 0
+			| (value[0] === HIGH ? 1 << 0 : 0)
+			| (value[1] === HIGH ? 1 << 1 : 0)
+			| (value[2] === HIGH ? 1 << 2 : 0)
+			| (value[3] === HIGH ? 1 << 3 : 0)
+			| (value[4] === HIGH ? 1 << 4 : 0)
+			| (value[5] === HIGH ? 1 << 5 : 0)
+			| (value[6] === HIGH ? 1 << 6 : 0)
+			| (value[7] === HIGH ? 1 << 7 : 0)
 
 		return u8.buffer
   }

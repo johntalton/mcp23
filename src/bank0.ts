@@ -7,7 +7,9 @@ import {
 	InterruptControl,
 	InterruptFlag,
 	Mode,
-	PullUp,
+	PullUp
+} from './defines.js'
+import {
 	REGISTERS_BANK_0,
 	REGISTERS_BANK_1
 } from './defines.js'

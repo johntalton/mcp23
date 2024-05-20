@@ -99,34 +99,3 @@ export const REGISTERS_BANK_1 = {
 	GPIOB: 0x19,
 	OLATB: 0x1A
 }
-
-
-
-
-
-
-// export const BIT_SET = 1
-// export const BIT_UNSET = 0
-
-// export const MIR_EN = BIT_SET
-// export const SEQ_EN = BIT_UNSET
-// export const SLEW_EN = BIT_UNSET
-// export const HWA_EN = BIT_SET
-// export const ODR_OPENDRAIN = BIT_SET
-// export const POL_ACTIVELOW = BIT_UNSET
-
-// function NOT_BIT(bit: number) { return bit === BIT_SET ? BIT_UNSET : BIT_SET }
-
-// export const MIR_DEN = NOT_BIT(MIR_EN)
-// export const SEQ_DEN = NOT_BIT(SEQ_EN)
-// export const SLEW_DEN = NOT_BIT(SLEW_EN)
-// export const HWA_DEN = NOT_BIT(HWA_EN)
-// export const ODR_ACTIVEDRIVER = NOT_BIT(ODR_OPENDRAIN)
-// export const POL_ACTIVEHIGH = NOT_BIT(POL_ACTIVELOW)
-
-// export const DEFAULT_MIR = MIR_DEN
-// export const DEFAULT_SEQ = SEQ_EN
-// export const DEFAULT_SLEW = SLEW_EN
-// export const DEFAULT_HWA = HWA_DEN
-// export const DEFAULT_ODR = ODR_ACTIVEDRIVER
-// export const DEFAULT_POL = POL_ACTIVELOW

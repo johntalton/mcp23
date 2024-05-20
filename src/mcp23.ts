@@ -59,6 +59,17 @@ export class MCP23 {
 	async getOutputValues(mode: Mode) { return CommonBank0.getOutputValues(this.#bus, mode) }
 	async getOutputLatchValues(mode: Mode) { return CommonBank0.getOutputLatchValues(this.#bus, mode) }
 
+	// async setDirections(mode: Mode, value) {}
+	// async setPolarities(mode: Mode, value) {}
+	// async setInterrupts(mode: Mode, value) {}
+	// async setDefaultValues(mode: Mode, value) {}
+	// async setInterruptControls(mode: Mode, value) {}
+	// async setPullUps(mode: Mode, value) {}
+	// async setInterruptFlags(mode: Mode, value) {}
+	// async setInterruptCaptureValues(mode: Mode, value) {}
+	// async setOutputValues(mode: Mode, value) {}
+	// async setOutputLatchValues(mode: Mode, value) {}
+
 	// things that can be done in Bank 0 when sequential is True
 	async getPorts(mode: Mode) { return CommonBank0Sequential.getPorts(this.#bus, mode) }
 
