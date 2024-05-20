@@ -1,10 +1,7 @@
 {
   "name": "@johntalton/mcp23",
   "version": "6.0.0",
-  "description": "",
-  "author": "johntalton@gmail.com",
   "license": "MIT",
-  "main": "lib/index.js",
   "type": "module",
   "exports": {
     ".": "./lib/index.js"
@@ -21,8 +18,7 @@
     "build:watch": "tsc --watch"
   },
   "dependencies": {
-    "@johntalton/and-other-delights": "^7.0.1",
-    "@johntalton/bitsmush": "^1.0.1"
+    "@johntalton/and-other-delights": "^7.0.1"
   },
   "devDependencies": {
     "typescript": "^5.1.3"

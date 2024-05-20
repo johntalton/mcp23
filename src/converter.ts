@@ -26,10 +26,29 @@ export class Converter {
 			new Uint8Array(buffer.buffer, buffer.byteOffset, buffer.byteLength) :
 			new Uint8Array(buffer)
 
-		const [ _value ] = u8
+		const [ value ] = u8
+
+		const bank = (value >> 7) & SINGLE_BIT_MASK
+		const mirror = ((value >> 6) & SINGLE_BIT_MASK) === BIT_SET
+		const seqop = ((value >> 5) & SINGLE_BIT_MASK) === BIT_SET
+		const disslw = ((value >> 4) & SINGLE_BIT_MASK) === BIT_SET
+		const haen = ((value >> 3) & SINGLE_BIT_MASK) === BIT_SET
+		const odr = ((value >> 2) & SINGLE_BIT_MASK) === BIT_SET
+		const intpol = ((value >> 1) & SINGLE_BIT_MASK) === BIT_SET
 
 		return {
+			slew: !disslw,
+			hardwareAddressEnabled: haen,
 
+			mode: {
+				bank,
+				sequential: !seqop
+			},
+			interrupt: {
+				mirror,
+				openDrain: odr,
+				interruptPolarityHigh: intpol
+			}
 		}
 	}
 
