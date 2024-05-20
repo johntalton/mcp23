@@ -127,14 +127,14 @@ export class Converter {
 		const { mirror, openDrain, interruptPolarityHigh } = interrupt
 		const { bank, sequential } = mode
 
-		u8[0] = 0
-			| (bank === BANK_1 ? SINGLE_BIT_MASK << 7 : 0)
-			| (mirror ? SINGLE_BIT_MASK << 6 : 0)
-			| (!sequential ? SINGLE_BIT_MASK << 5 : 0)
-			| (!slew ? SINGLE_BIT_MASK << 4 : 0)
-			| (hardwareAddress ? SINGLE_BIT_MASK << 3 : 0)
-			| (openDrain ? SINGLE_BIT_MASK << 2 : 0)
-			| (interruptPolarityHigh ? SINGLE_BIT_MASK << 1 : 0)
+		u8[0] = 0 |
+			(bank === BANK_1 ? SINGLE_BIT_MASK << 7 : 0) |
+			(mirror ? SINGLE_BIT_MASK << 6 : 0) |
+			(!sequential ? SINGLE_BIT_MASK << 5 : 0) |
+			(!slew ? SINGLE_BIT_MASK << 4 : 0) |
+			(hardwareAddress ? SINGLE_BIT_MASK << 3 : 0) |
+			(openDrain ? SINGLE_BIT_MASK << 2 : 0) |
+			(interruptPolarityHigh ? SINGLE_BIT_MASK << 1 : 0)
 
 		return into.buffer
 	}
