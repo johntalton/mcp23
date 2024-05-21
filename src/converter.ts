@@ -144,15 +144,15 @@ export class Converter {
 			new Uint8Array(into.buffer, into.byteOffset, into.byteLength) :
 			new Uint8Array(into)
 
-		u8[0] = 0
-			| (value[0] === HIGH ? 1 << 0 : 0)
-			| (value[1] === HIGH ? 1 << 1 : 0)
-			| (value[2] === HIGH ? 1 << 2 : 0)
-			| (value[3] === HIGH ? 1 << 3 : 0)
-			| (value[4] === HIGH ? 1 << 4 : 0)
-			| (value[5] === HIGH ? 1 << 5 : 0)
-			| (value[6] === HIGH ? 1 << 6 : 0)
-			| (value[7] === HIGH ? 1 << 7 : 0)
+		u8[0] = 0 |
+			(value[0] === HIGH ? 1 << 0 : 0) |
+			(value[1] === HIGH ? 1 << 1 : 0) |
+			(value[2] === HIGH ? 1 << 2 : 0) |
+			(value[3] === HIGH ? 1 << 3 : 0) |
+			(value[4] === HIGH ? 1 << 4 : 0) |
+			(value[5] === HIGH ? 1 << 5 : 0) |
+			(value[6] === HIGH ? 1 << 6 : 0) |
+			(value[7] === HIGH ? 1 << 7 : 0)
 
 		return u8.buffer
   }
