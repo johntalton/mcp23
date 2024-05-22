@@ -128,7 +128,7 @@ export class CommonDirect {
 
 	static async setDefaultValue(aBus: I2CAddressedBus, mode: Mode, port: Port, value: Array<Digital>) {
 		const buffer = Converter.encodeDigital(value)
-		return aBus.writeI2cBlock(REGISTERS_BY_BANK_PORT[mode.bank][port].IPOL, buffer)
+		return aBus.writeI2cBlock(REGISTERS_BY_BANK_PORT[mode.bank][port].DEFVAL, buffer)
 	}
 
 	static async getInterruptControl(aBus: I2CAddressedBus, mode: Mode, port: Port): Promise<Array<InterruptControl>> {
