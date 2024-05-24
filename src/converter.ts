@@ -53,8 +53,32 @@ export class Converter {
 		}
 	}
 
-  static decodePort(_buffer: I2CBufferSource) {
-		throw new Error('no impl')
+  static decodePort(buffer: I2CBufferSource) {
+		const u8 = ArrayBuffer.isView(buffer) ?
+			new Uint8Array(buffer.buffer, buffer.byteOffset, buffer.byteLength) :
+			new Uint8Array(buffer)
+
+		const direction = Converter.decodeDirection(u8.subarray(0, 1))
+		const polarity = Converter.decodePolarity(u8.subarray(1, 2))
+		const interrupt = Converter.decodeInterrupt(u8.subarray(2, 3))
+		const defaultValue = Converter.decodeDigital(u8.subarray(3, 4))
+		const interruptControl = Converter.decodeInterruptControl(u8.subarray(4, 5))
+		// iocon
+		const pullUp = Converter.decodePullUp(u8.subarray(6, 7))
+		// flags
+		// capture
+		// gpio
+		const outputLatchValue = Converter.decodeDigital(u8.subarray(10, 11))
+
+		return {
+			direction,
+			polarity,
+			interrupt,
+			defaultValue,
+			interruptControl,
+			pullUp,
+			outputLatchValue
+		}
 	}
 
 	static decodePorts(_buffer: I2CBufferSource) {

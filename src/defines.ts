@@ -47,6 +47,16 @@ export const MODE = {
 	INTERLACED_BLOCK: { bank: BANK_0, sequential: true }
 }
 
+export const DEFAULT = {
+	DIRECTION: DIRECTION.IN,
+	POLARITY: false,
+	INTERRUPT: false,
+	DEFAULT_VALUE: LOW,
+	INPUT_CONTROL: INTERRUPT_CONTROL.PREVIOUS_VALUE,
+	PULL_UP: false,
+	OUTPUT_LATCH_VALUE: LOW
+}
+
 // bank 0 layout
 export const REGISTERS_BANK_0 = {
 	IODIRA: 0x00,
