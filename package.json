@@ -18,7 +18,7 @@
     "build:watch": "tsc --watch"
   },
   "dependencies": {
-    "@johntalton/and-other-delights": "^7.0.1"
+    "@johntalton/and-other-delights": "^8.1.0"
   },
   "devDependencies": {
     "typescript": "^5.1.3"
