@@ -1,3 +1,5 @@
+export const DEFAULT_ADDRESS = 0x20
+
 export type Bank = 0 | 1
 
 export type Mode = {
