@@ -1,6 +1,6 @@
 {
   "name": "@johntalton/mcp23",
-  "version": "6.0.2",
+  "version": "6.0.3",
   "license": "MIT",
   "type": "module",
   "exports": {
@@ -22,5 +22,8 @@
   },
   "devDependencies": {
     "typescript": "^5.9.2"
+  },
+  "repository": {
+    "url": "https://github.com/johntalton/mcp23"
   }
 }
