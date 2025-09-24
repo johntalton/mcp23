@@ -4,7 +4,7 @@ A Feature rich general I/O chip available in single port (8-bit) and dual port (
 
 [![npm Version](http://img.shields.io/npm/v/@johntalton/mcp23.svg)](https://www.npmjs.com/package/@johntalton/mcp23)
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/johntalton/mcp23)
-[![CI](https://github.com/johntalton/mcp23/actions/workflows/CI.yaml/badge.svg)](https://github.com/johntalton/mcp23/actions/workflows/CI.yaml)
+[![CI](https://github.com/johntalton/mcp23/actions/workflows/CI.yml/badge.svg)](https://github.com/johntalton/mcp23/actions/workflows/CI.yml)
 
 ## Banks and sequential mode
 
